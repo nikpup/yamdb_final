@@ -52,7 +52,7 @@ jobs:
         # Пуш образа в Docker Hub
         uses: docker/build-push-action@v2
         with:
-          context: ./
-          file: api_yamdb/Dockerfile
+          context: ./api_yamdb
+          file: ./api_yamdb/Dockerfile
           push: true
-          tags: peterzzz98/api-yamdb:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/api-yamdb:latest
