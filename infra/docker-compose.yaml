@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgresql_value:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+  web:
+    build:
+      context: ../api_yamdb
+    restart: always
+    volumes:
+      # Если я правильно понимаю, то web собирает статику в том static_value, а затем nginx раздает ее из этого же тома.
+      # То есть должна быть связь между контейнером web и nginx. Я пробовал убрать том из web, но в этом случае папка
+      # /var/html/static/ в контейнере nginx оказывалась ожидаемо пустой после сборки статики и статика не отображалась.
+      # В файле default.conf прописал, что если запрос касается статики, то ее раздает nginx из папки /var/html/static/.
+      - static_value:/static/
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+  nginx:
+      image: nginx:1.21.3-alpine
+      ports:
+        - "80:80"
+      volumes:
+        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        - static_value:/var/html/static/
+      depends_on:
+        - web
+
+volumes:
+  static_value:
+  postgresql_value:
