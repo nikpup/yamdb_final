@@ -41,6 +41,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Set up Docker Buildx
         # Вызов сборщика контейнеров docker
+        run: pwd
         uses: docker/setup-buildx-action@v1
       - name: Login to Docker
         # Запуск скрипта авторизации на Docker Hub
