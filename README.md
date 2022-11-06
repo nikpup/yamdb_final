@@ -13,6 +13,10 @@ The list of categories can be expanded by the administrator.
 - Docker
 - Git
 
+## Workflow status
+
+![workflow status](https://github.com/nikpup/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+
 ## How to launch a project:
 
 Clone the repository and go to it on the command line:
