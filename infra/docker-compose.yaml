@@ -9,13 +9,9 @@ services:
       - ./.env
   web:
     build:
-      context: ../api_yamdb
+      context: ../peterzzz/api_yamdb
     restart: always
     volumes:
-      # Если я правильно понимаю, то web собирает статику в том static_value, а затем nginx раздает ее из этого же тома.
-      # То есть должна быть связь между контейнером web и nginx. Я пробовал убрать том из web, но в этом случае папка
-      # /var/html/static/ в контейнере nginx оказывалась ожидаемо пустой после сборки статики и статика не отображалась.
-      # В файле default.conf прописал, что если запрос касается статики, то ее раздает nginx из папки /var/html/static/.
       - static_value:/static/
     depends_on:
       - db
