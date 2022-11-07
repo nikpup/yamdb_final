@@ -56,3 +56,5 @@ Fill the database with data in infra/fixtures.json:
 docker-compose exec web python manage.py loaddata fixtures.json 
 ```
 The image of api is available on [DockerHub](https://hub.docker.com/repository/docker/peterzzz98/api-yamdb).
+
+The project is available at http://84.201.152.100/
