@@ -24,7 +24,6 @@ jobs:
           python -m flake8
           cd ..
           pwd
-          pytest
           cd api_yamdb/api_yamdb/
           python manage.py test
 
